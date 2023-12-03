@@ -40,11 +40,6 @@ int main() {
 		skip = false;
 		aborted = false;
 		buffer = "";
-		game_vals = {
-			{"red", 12},
-			{"green", 13}, 
-			{"blue", 14}
-		};
 
 		for (int i = 5; i < linijka.length(); i++) {
 			if (skip) {
@@ -66,6 +61,7 @@ int main() {
 					aborted = true;
 					break;
 				}
+
 				buffer = "";
 			} else {
 				buffer.push_back(linijka[i]);
@@ -75,7 +71,7 @@ int main() {
 		if (balls_num > game_vals[buffer]) {
 			aborted = true;
 		}
-		
+
 		if (!aborted) {
 			suma += game_id;
 		}
