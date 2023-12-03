@@ -45,7 +45,6 @@ class Solve:
             if i <= 0 or i+height >= len(self.file):
                 continue
 
-
             # Sprawdź czy w obecnie oprzeszukiwanej linijce znajdują się liczby
             for shift in range(j if j == 0 else j-1, j+2): # j+2 ponieważ range() to zbiór lewostronnie domknięty
                 for letter in self.file[i+height][shift]:
