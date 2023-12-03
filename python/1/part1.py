@@ -5,14 +5,14 @@ def get_first_number(line):
 
     return "0"
 
-suma = 0
+out = 0
 
 with open("input.txt", "r") as F:
     for line in F:
         line = line.strip()
 
-        suma += int(get_first_number(line) + get_first_number(line[::-1]))
+        out += int(get_first_number(line) + get_first_number(line[::-1]))
 
 
-print(suma)
+print(out)
 

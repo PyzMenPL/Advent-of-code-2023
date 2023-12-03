@@ -1,6 +1,6 @@
 colors = {"red": 12, "green": 13, "blue": 14}
 
-suma = 0
+out = 0
 
 with open("input.txt", "r") as F:
     for i, line in enumerate(F, start=1):
@@ -17,6 +17,6 @@ with open("input.txt", "r") as F:
                 break
 
         if increment:
-            suma += i
+            out += i
 
-print(suma)
+print(out)

@@ -12,13 +12,13 @@ using std::isdigit;
 
 class Solve {
 private:
-	int suma = 0;
-	vector<string> plik;
+	int sum = 0;
+	vector<string> file;
 	
 	void main() {
-		for (int i = 0; i < plik.size(); i++) {
-			for (int j = 0; j < plik[i].length(); j++) {
-				if (plik[i][j] == '*') {
+		for (int i = 0; i < file.size(); i++) {
+			for (int j = 0; j < file[i].length(); j++) {
+				if (file[i][j] == '*') {
 					find_numbers_around(i, j);
 				}
 			}
@@ -29,7 +29,7 @@ private:
 		std::set<int> digits_found;
 
 		for (int height = -1; height < 2; height++) {
-			if (i <= 0 || i + height >= plik.size()) {
+			if (i <= 0 || i + height >= file.size()) {
 				continue;
 			}
 
@@ -40,7 +40,7 @@ private:
 			}
 
 			for (; shift < j+2; shift++) {
-				if (isdigit(plik[i+height][shift])) {
+				if (isdigit(file[i+height][shift])) {
 					digits_found.insert(get_number_from(i+height, shift));
 				}
 			}
@@ -48,17 +48,17 @@ private:
 		}
 
 		if (digits_found.size() == 2) {
-			int iloczyn = 1;
+			int m = 1;
 			for (int digit : digits_found) {
-				iloczyn *= digit;
+				m *= digit;
 			}
-			suma += iloczyn;	
+			sum += m;	
 		}
 	}
 
 	int get_number_from(int i, int j) {
 		string number = "";
-		number.push_back(plik[i][j]);
+		number.push_back(file[i][j]);
 
 		for (int go_left = 0; go_left < 2; go_left++) {
 			int shift = 1;
@@ -67,15 +67,15 @@ private:
 				shift = -1;
 			}
 
-			if (j + shift < 0 || j + shift >= plik[i].length()) {
+			if (j + shift < 0 || j + shift >= file[i].length()) {
 				continue;
 			}
 
-			while (isdigit(plik[i][j+shift])) {
+			while (isdigit(file[i][j+shift])) {
 				if (go_left) {
-					number = plik[i][j+shift] + number;
+					number = file[i][j+shift] + number;
 				} else {
-					number.push_back(plik[i][j+shift]);
+					number.push_back(file[i][j+shift]);
 				}
 
 				if (go_left) {
@@ -84,7 +84,7 @@ private:
 					shift++;
 				}
 
-				if (j + shift < 0 || j + shift >= plik[i].length()) {
+				if (j + shift < 0 || j + shift >= file[i].length()) {
 					break;
 				}
 			}
@@ -97,15 +97,15 @@ private:
 public:
 	Solve() {
 		std::ifstream input("input.txt");
-		string linijka;
+		string line;
 
-		while (std::getline(input, linijka)) {
-			plik.push_back(linijka);
+		while (std::getline(input, line)) {
+			file.push_back(line);
 		}
 
 		input.close();
 		main();
-		cout << suma << endl;	
+		cout << sum << endl;	
 	}	
 };
 

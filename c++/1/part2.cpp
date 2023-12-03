@@ -28,43 +28,43 @@ const map<string, string> numbers = {
 	{"nine", "9"}
 };
 
-string get_numbers_from(string tekst, bool rev=false) {
-	for (int i = 0; i < tekst.length(); i++) {
-		for (pair<string, string> para : numbers) {
-			if (i + para.first.length() < tekst.length()) {
-				pair<string, string> tmp = para;
+string get_numbers_from(string text, bool rev=false) {
+	for (int i = 0; i < text.length(); i++) {
+		for (pair<string, string> p : numbers) {
+			if (i + p.first.length() < text.length()) {
+				pair<string, string> tmp = p;
 				if (rev) {
 					reverse(tmp.first.begin(), tmp.first.end());
 				}
 				
-				if (tekst.substr(i, tmp.first.length()) == tmp.first) {
-					tekst.replace(i, tmp.first.length(), tmp.second);
+				if (text.substr(i, tmp.first.length()) == tmp.first) {
+					text.replace(i, tmp.first.length(), tmp.second);
 				}
 			}
 		}
 	}
 
 	if (rev) {
-		reverse(tekst.begin(), tekst.end());
+		reverse(text.begin(), text.end());
 	}
 
-	return tekst;
+	return text;
 }
 
-char get_first_number(string tekst) {
-	for (int i = 0; i < tekst.length(); i++) {
-		if (isdigit(tekst[i])) {
-			return tekst[i];
+char get_first_number(string text) {
+	for (int i = 0; i < text.length(); i++) {
+		if (isdigit(text[i])) {
+			return text[i];
 		}
 	}
 
 	return '0';
 }
 
-char get_last_number(string tekst) {
-	for (int i = tekst.length()-1; i >= 0; i--) {
-		if (isdigit(tekst[i])) {
-			return tekst[i];
+char get_last_number(string text) {
+	for (int i = text.length()-1; i >= 0; i--) {
+		if (isdigit(text[i])) {
+			return text[i];
 		}
 	}
 
@@ -72,30 +72,30 @@ char get_last_number(string tekst) {
 }
 
 int main() {
-	ifstream plik("input.txt");	
+	ifstream file("input.txt");	
 
-	if (!plik.is_open()) {
-		cerr << "Nie można otworzyć pliku: input.txt\n";
+	if (!file.is_open()) {
+		cerr << "No file: input.txt\n";
 		return 1;
 	}
 
-	string tekst;
-	string rev_tekst;
+	string text;
+	string rev_text;
 
-	int suma = 0;
+	int sum = 0;
 
-	while (plik >> tekst/*getline(plik, tekst)*/) {
-		rev_tekst = tekst;
-		reverse(rev_tekst.begin(), rev_tekst.end());
+	while (file >> text) {
+		rev_text = text;
+		reverse(rev_text.begin(), rev_text.end());
 
-		string line = string(1, get_first_number(get_numbers_from(tekst))) + string(1, get_last_number(get_numbers_from(rev_tekst, true)));
+		string line = string(1, get_first_number(get_numbers_from(text))) + string(1, get_last_number(get_numbers_from(rev_text, true)));
 
-		suma += stoi(line);
+		sum += stoi(line);
 	}
 
-	cout << suma << endl;
+	cout << sum << endl;
 	
-	plik.close();
+	file.close();
 
 	return 0;
 }

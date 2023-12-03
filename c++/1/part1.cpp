@@ -11,20 +11,20 @@ using std::endl;
 using std::isdigit;
 using std::stoi;
 
-char get_first_number(string tekst) {
-	for (int i = 0; i < tekst.length(); i++) {
-		if (isdigit(tekst[i])) {
-			return tekst[i];
+char get_first_number(string text) {
+	for (int i = 0; i < text.length(); i++) {
+		if (isdigit(text[i])) {
+			return text[i];
 		}
 	}
 
 	return '0';
 }
 
-char get_last_number(string tekst) {
-	for (int i = tekst.length()-1; i >= 0; i--) {
-		if (isdigit(tekst[i])) {
-			return tekst[i];
+char get_last_number(string text) {
+	for (int i = text.length()-1; i >= 0; i--) {
+		if (isdigit(text[i])) {
+			return text[i];
 		}
 	}
 
@@ -32,26 +32,26 @@ char get_last_number(string tekst) {
 }
 
 int main() {
-	ifstream plik("input.txt");	
+	ifstream file("input.txt");	
 
-	if (!plik.is_open()) {
-		cerr << "Nie można otworzyć pliku: input.txt\n";
+	if (!file.is_open()) {
+		cerr << "No file: input.txt\n";
 		return 1;
 	}
 
-	string tekst;
+	string text;
 
-	int suma = 0;
+	int sum = 0;
 
-	while (getline(plik, tekst)) {
-		string line = string(1, get_first_number(tekst)) + string(1, get_last_number(tekst));
+	while (getline(file, text)) {
+		string line = string(1, get_first_number(text)) + string(1, get_last_number(text));
 		
-		suma += stoi(line);
+		sum += stoi(line);
 	}
 
-	cout << suma << endl;
+	cout << sum << endl;
 	
-	plik.close();
+	file.close();
 
 	return 0;
 }

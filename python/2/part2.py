@@ -1,4 +1,4 @@
-suma = 0
+out = 0
 
 with open("input.txt", "r") as F:
     for i, line in enumerate(F, start=1):
@@ -21,6 +21,7 @@ with open("input.txt", "r") as F:
                     values[color] = num
 
 
-        suma += values["green"] * values["red"] * values["blue"]
+        out += values["green"] * values["red"] * values["blue"]
 
-print(suma)
+print(out)
+

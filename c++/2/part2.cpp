@@ -11,14 +11,14 @@ using std::ifstream;
 using std::unordered_map;
 
 int main() {
-	ifstream plik("input.txt");
+	ifstream file("input.txt");
 
-	if (!plik.is_open()) {
-		// Nie ma pliku XD
+	if (!file.is_open()) {
+		// No file XD
 		return 1;
 	}
 
-	int suma = 0;
+	int sum = 0;
 
 	int game_id = 1;
 	int balls_num = 0;
@@ -31,10 +31,10 @@ int main() {
 		{"blue", 0}
 	};
 
-	string linijka = "";
+	string line = "";
 	
 
-	while (getline(plik, linijka)) {
+	while (getline(file, line)) {
 		game_id = 1;
 		balls_num = 0;
 		skip = false;
@@ -46,20 +46,20 @@ int main() {
 			{"blue", 0}
 		};
 
-		for (int i = 5; i < linijka.length(); i++) {
+		for (int i = 5; i < line.length(); i++) {
 			if (skip) {
 				skip = false;
 				continue;
 			}
 
-			if (linijka[i] == ':') {
+			if (line[i] == ':') {
 				skip = true;
 				game_id = stoi(buffer);
 				buffer = "";
-			} else if (linijka[i] == ' ') {
+			} else if (line[i] == ' ') {
 				balls_num = stoi(buffer);
 				buffer = "";
-			} else if (linijka[i] == ',' || linijka[i] == ';') {
+			} else if (line[i] == ',' || line[i] == ';') {
 				skip = true;
 
 				if (balls_num > game_vals[buffer]) {
@@ -68,7 +68,7 @@ int main() {
 
 				buffer = "";
 			} else {
-				buffer.push_back(linijka[i]);
+				buffer.push_back(line[i]);
 			}
 		}
 
@@ -76,12 +76,12 @@ int main() {
 			game_vals[buffer] = balls_num;
 		}
 
-		suma += game_vals["red"] * game_vals["green"] * game_vals["blue"];
+		sum += game_vals["red"] * game_vals["green"] * game_vals["blue"];
 	}
 
-	cout << suma << endl;
+	cout << sum << endl;
 
-	plik.close();
+	file.close();
 
 	return 0;
 }
