@@ -1,4 +1,5 @@
 // 35747 - too low
+// 93 - too low
 
 #include <iostream>
 #include <vector>
@@ -11,56 +12,36 @@ using std::string;
 using std::stoi;
 using std::isdigit;
 
-/*vector<string> plik = {
-    "Time:        45     97     72     95",
-    "Distance:   305   1062   1110   1695"
-};*/
 
 int get_dist(int speed, int time_left) {
     return speed * time_left;
 }
 
-int main()
-{
-    //vector<int> times = {45977295};
-    //vector<long> distances = {305106211101695};
-    
-    //vector<int> times = {71530};
-    //vector<long> distances = {940200};
-    
-    /*for (int i = 0; i < plik.size(); i++) {
-        string line = plik[i];
-        string buffer;
-        for (int j = 9; j < line.length(); j++) {
-            if (isdigit(line[j])) {
-                buffer.push_back(line[j]);
-            } else if (buffer != "") {
-                if (i) {
-                    distances.push_back(stoi(buffer));
-                } else {
-                    times.push_back(stoi(buffer));
-                }
-                buffer = "";
-            } 
-        }
-        
-        if (i) {
-            distances.push_back(stoi(buffer));
-        } else {
-            times.push_back(stoi(buffer));
-        }
-    }*/
-    
+void test(unsigned long long czas = 71530, unsigned long long record = 940200) {
     unsigned long long new_records = 0;
+    unsigned long long last_result = 0;
     for (int j = 14; j < 71517; j++) {
-        unsigned long long result = get_dist(j, 45977295-j);
+        unsigned long long result = get_dist(j, czas-j);
         
-        if (result > 305106211101695) {
+        if (result < last_result) {
+            new_records *= 2;
+            break;
+        }
+        
+        if (result > record) {
             new_records++;
         }
+        
+        last_result = result;
     }
    
-    cout << new_records << endl;
+    cout << new_records-1 << endl;
+}
+
+int main()
+{
+    test();
+    test(45977295, 305106211101695);
 
     return 0;
 }
