@@ -24,7 +24,6 @@ class Hand:
         else:
             self.type = self._get_type()
 
-
     def _gen_cards(self, cards, js) -> list:
         """Method which generates every combination of a hand of cards"""
         hands = []
