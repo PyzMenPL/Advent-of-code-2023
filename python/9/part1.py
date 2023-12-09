@@ -5,7 +5,7 @@ def get_extrapolated_value(numbers: list) -> int:
         diff = []
 
         for i in range(0, len(numbers)-1):
-            diff.append(abs(numbers[i] - numbers[i+1]))
+            diff.append(numbers[i+1] - numbers[i])
 
         return get_extrapolated_value(diff) + numbers[-1] 
 
